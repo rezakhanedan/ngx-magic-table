@@ -15,7 +15,7 @@
 
     </ngx-column-template>
 
-    <ngx-column-template cellWidth="400"  name="Phone" parent="Numbers" title="Phone" index="2" [visible]="true">
+    <ngx-column-template cellWidth="400"  name="Phone" parent="Numbers" title="تلفن همراه" index="2" [visible]="true">
       <ng-template let-cell="cell" let-direction="direction" name="header">تلفن همراه
         <i class="fa" [setDirection]="direction"></i>
       </ng-template>
@@ -23,32 +23,38 @@
 
     </ngx-column-template>
 
-    <ngx-column-template  cellWidth="400"  name="Id" parent="Numbers" index="1"  title="Id" [draggable]="false" [visible]="true">
+    <ngx-column-template  cellWidth="400"  name="Id" parent="Numbers" index="1"  title="شناسه" [draggable]="false" [visible]="true">
       <ng-template let-row="row" let-cell="cell" name="body">
         {{row.Id}}
       </ng-template>
-      <ng-template let-cell="cell" let-direction="direction" name="header">{{cell.name}}
+      <ng-template let-cell="cell" let-direction="direction" name="header">شناسه
         <i class="fa" [setDirection]="direction"></i>
       </ng-template>
     </ngx-column-template>
 
-    <ngx-column-template cellWidth="400"  name="Type" parent="Numbers" title="Type"  collection="Type" index="1" [draggable]="false" [visible]="true">
+    <ngx-column-template cellWidth="400"  name="Type" parent="Numbers" title="نوع"  collection="Type" index="1" [draggable]="false" [visible]="true">
       <ng-template let-row="row" let-cell="cell" let-index="index" name="body">{{row.Type[index]}}</ng-template>
-      <ng-template let-cell="cell" let-direction="direction" name="header">{{cell.name}}
+      <ng-template let-cell="cell" let-direction="direction" name="header">نوع
         <i class="fa" [setDirection]="direction"></i>
       </ng-template>
     </ngx-column-template>
 
-    <ngx-column-template cellWidth="400"  name="Size" parent="Numbers" title="Size" collection="Size" index="1" [draggable]="false" [visible]="true">
+    <ngx-column-template  cellWidth="400"  name="Size" parent="Numbers" title="سایز" collection="Size" index="1" [draggable]="false" [visible]="true">
       <ng-template let-row="row" let-cell="cell" let-index="index" name="body">{{row.Size[index]}}</ng-template>
-      <ng-template let-cell="cell" let-direction="direction" name="header">{{cell.name}}
+      <ng-template let-cell="cell" let-direction="direction" name="header">سایز
         <i class="fa" [setDirection]="direction"></i>
       </ng-template>
     </ngx-column-template>
-    <ngx-column-template cellWidth="400"  name="Name" index="1" title="Name" [draggable]="false" [visible]="true">
+    <ngx-column-template cellWidth="400"  name="Name" index="1" title="نام" [draggable]="false" [visible]="true">
       <ng-template let-row="row" let-cell="cell" name="body">{{row.Name}}</ng-template>
-      <ng-template let-cell="cell" let-direction="direction" name="header">{{cell.name}}
+      <ng-template let-cell="cell" let-direction="direction" name="header">نام
         <i class="fa" [setDirection]="direction"></i>
+      </ng-template>
+    </ngx-column-template>
+    <ngx-column-template [sortable]="false" [editCheckbox]="true" (toggleColumnsChange)="toggleColumnsChange()" (checkChange)="checkChange($event)"  [headerCheckbox]="true" [bodyCheckbox]="true" cellWidth="150"  name="Active" index="1" title="فعال" [draggable]="false" [visible]="true">
+      <ng-template let-row="row" let-cell="cell" name="body">
+      </ng-template>
+      <ng-template let-cell="cell"  name="header">
       </ng-template>
     </ngx-column-template>
   </ngx-magic-table>

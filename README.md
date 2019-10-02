@@ -29,6 +29,7 @@ Angular 6 smart DataGrid based on `bootstrap` and `font-awesome`
 - Add pagination
 - Reset table style
 - Show message
+- Show checkBox in column
 
 
 ## Preview

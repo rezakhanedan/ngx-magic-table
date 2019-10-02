@@ -1,7 +1,5 @@
-import {
-  Component, Input, Output, EventEmitter, ContentChildren,
-  TemplateRef, QueryList, SimpleChanges, AfterContentInit, OnChanges
-} from '@angular/core';
+import { Component, Input, Output, EventEmitter, ContentChildren, TemplateRef,
+  QueryList, SimpleChanges, AfterContentInit, OnChanges } from '@angular/core';
 import { NamedTemplateDirective } from './../ngx-named-template/ngx-named-template.directive';
 
 @Component({
@@ -19,9 +17,13 @@ export class NgxColumnTemplateComponent implements AfterContentInit, OnChanges {
   @Input() collection: string;
   @Input() visible: boolean;
   @Input() cellWidth: number;
+  @Input() headerCheckbox: boolean;
+  @Input() bodyCheckbox: boolean;
+  @Input() editCheckbox: boolean;
 
   @Output() changed = new EventEmitter();
-
+  @Output() toggleColumnsChange = new EventEmitter();
+  @Output() checkChange = new EventEmitter();
 
   public filters: any[] = [];
   @ContentChildren(NamedTemplateDirective) templates: QueryList<NamedTemplateDirective>;
@@ -37,22 +39,35 @@ export class NgxColumnTemplateComponent implements AfterContentInit, OnChanges {
     this.index = 0;
     this.cellWidth = 0;
     this.sortable = true;
-    this.draggable = true;
     this.visible = true;
+    this.draggable = true;
     this.collection = '';
+    this.headerCheckbox = false;
+    this.bodyCheckbox = false;
+    this.editCheckbox = false;
   }
 
   static normalizeIndexes(templates: NgxColumnTemplateComponent[]) {
-    templates.sort((first, second) => {
-      if (first.parent < second.parent) { return -1; }
-      if (first.parent > second.parent) { return 1; }
+    templates
+      .sort((first, second) => {
+        if (first.parent < second.parent) {
+          return -1;
+        }
+        if (first.parent > second.parent) {
+          return 1;
+        }
 
-      if (first.index < second.index) { return -1; }
-      if (first.index > second.index) { return 1; }
-      return 0;
-    }).forEach((t, index) => {
-      t.index = index;
-    });
+        if (first.index < second.index) {
+          return -1;
+        }
+        if (first.index > second.index) {
+          return 1;
+        }
+        return 0;
+      })
+      .forEach((t, index) => {
+        t.index = index;
+      });
   }
 
   ngAfterContentInit() {
@@ -68,4 +83,11 @@ export class NgxColumnTemplateComponent implements AfterContentInit, OnChanges {
     this.changed.emit(this);
   }
 
+  emitToggle(): void {
+    this.toggleColumnsChange.emit();
+  }
+
+  emitCheckChange(row: any): void {
+    this.checkChange.emit(row);
+  }
 }
